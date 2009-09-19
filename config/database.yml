@@ -14,7 +14,9 @@ development:
   database: kamitsukai_development
   pool: 5
   username: kamitsukai
-  password:
+  password: Zi4goo
+  host: localhost
+  port: 5432
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -40,7 +42,9 @@ test:
   database: kamitsukai_test
   pool: 5
   username: kamitsukai
-  password:
+  password: Zi4goo
+  host: localhost
+  port: 5432
 
 production:
   adapter: postgresql
@@ -48,4 +52,6 @@ production:
   database: kamitsukai_production
   pool: 5
   username: kamitsukai
-  password:
+  password: Zi4goo
+  host: localhost
+  port: 5432
