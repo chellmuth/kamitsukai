@@ -35,4 +35,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def assert_valid(record)
+    assert record.valid?, record.errors.full_messages.join("\n")
+  end
 end
