@@ -10,4 +10,10 @@ class User < ActiveRecord::Base
     :class_name => 'User',
     :foreign_key => 'friend_id',
     :association_foreign_key => 'user_id'
+  has_many :lent_books,
+    :foreign_key => 'lender_id'
+  has_many :loaned_books,
+    :class_name  => 'LentBook',
+    :foreign_key => 'lendee_id'
+
 end

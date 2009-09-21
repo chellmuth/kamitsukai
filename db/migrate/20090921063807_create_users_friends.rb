@@ -5,6 +5,7 @@ class CreateUsersFriends < ActiveRecord::Migration
       t.references :friend
 
       t.timestamps
+    end
   end
 
   def self.down
