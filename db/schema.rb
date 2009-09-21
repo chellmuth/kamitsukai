@@ -9,7 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090921041206) do
+ActiveRecord::Schema.define(:version => 20090921053639) do
+
+  create_table "book_editions", :force => true do |t|
+    t.integer  "book_id",                       :null => false
+    t.string   "isbn",            :limit => 13
+    t.string   "ean",             :limit => 13
+    t.string   "asin"
+    t.string   "binding"
+    t.float    "dewey_decimal"
+    t.text     "publisher"
+    t.date     "published"
+    t.date     "released"
+    t.text     "studio"
+    t.integer  "pages"
+    t.integer  "height"
+    t.string   "height_units"
+    t.integer  "length"
+    t.string   "length_units"
+    t.integer  "width"
+    t.string   "width_units"
+    t.text     "detail_page_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "books", :force => true do |t|
+    t.text     "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :limit => 600, :null => false
