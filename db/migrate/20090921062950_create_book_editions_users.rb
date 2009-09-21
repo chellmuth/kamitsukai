@@ -1,6 +1,6 @@
 class CreateBookEditionsUsers < ActiveRecord::Migration
   def self.up
-    create_table :book_editionss_users do |t|
+    create_table :book_editions_users do |t|
       t.references :book_editions
       t.references :users
 
