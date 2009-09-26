@@ -24,6 +24,7 @@ Rails::Initializer.run do |config|
   config.gem "faker"
   config.gem "notahat-machinist", :lib => "machinist", :source => "http://gems.github.com"
   config.gem "pg", :version => '0.8.0'
+  config.gem "mongrel", :version => '1.1.5'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
