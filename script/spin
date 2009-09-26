@@ -1,7 +1,6 @@
 #!/bin/sh
 
 /u/apps/kamitsukai/current/script/process/spawner \
-   mongrel \
    --environment=production \
    --instances=5 \
    --address=127.0.0.1 \
