@@ -2,3 +2,4 @@
 /.devver
 /lib/tasks/devver.rake
 /.autotest
+/config/database.yml
