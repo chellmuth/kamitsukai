@@ -1,7 +1,0 @@
-#!/bin/sh
-
-/u/apps/kamitsukai/current/script/process/spawner \
-   --environment=production \
-   --instances=5 \
-   --address=127.0.0.1 \
-   --port=5000

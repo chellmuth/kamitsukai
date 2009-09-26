@@ -17,19 +17,17 @@ set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 
 task :after_update_code, :roles => :app do  
-  if ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '1'
+  unless ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '0'
     run "rake -f #{release_path}/Rakefile gems:build"
   end
 end
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# namespace :deploy do
-#   task :start {}
-#   task :stop {}
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+namespace :deploy do
+  task :start do
+  end
+  task :stop do
+  end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
