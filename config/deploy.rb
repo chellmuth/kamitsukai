@@ -16,6 +16,12 @@ set :branch, "master"
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 
+task :after_update_code, :roles => :app do  
+  if ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '1'
+    run "rake -f #{release_path}/Rakefile gems:build"
+  end
+end
+
 # If you are using Passenger mod_rails uncomment this:
 # if you're still using the script/reapear helper you will need
 # these http://github.com/rails/irs_process_scripts
