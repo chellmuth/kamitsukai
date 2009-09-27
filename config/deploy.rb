@@ -17,9 +17,14 @@ set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 
 task :after_update_code, :roles => :app do  
+
+  # Rebuild the gem native extensions, unless we explicitly say not to.
   unless ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '0'
     run "rake -f #{release_path}/Rakefile gems:build"
   end
+
+  # Generate the CSS files using MORE & LESS
+  run "rake -f #{release_path}/Rakefile more:parse"
 end
 
 namespace :deploy do

@@ -3,3 +3,4 @@
 /lib/tasks/devver.rake
 /.autotest
 /config/database.yml
+/public/stylesheets
