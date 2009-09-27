@@ -1,6 +1,8 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
+require File.expand_path(File.dirname(__FILE__) + "/blueprints")
+require 'authlogic/test_case'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -34,8 +36,21 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  # Reset Sham
+  setup { Sham.reset }
+
   # Add more helper methods to be used by all tests here...
   def assert_valid(record)
     assert record.valid?, record.errors.full_messages.join("\n")
   end
+
+  def login(user_info=nil)
+    user = User.make(user_info)
+    assert UserSession.create(user)
+    user
+  end
+end
+
+class ActionController::TestCase
+  setup :activate_authlogic
 end

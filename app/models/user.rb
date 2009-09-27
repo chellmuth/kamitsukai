@@ -15,5 +15,4 @@ class User < ActiveRecord::Base
   has_many :loaned_books,
     :class_name  => 'LentBook',
     :foreign_key => 'lendee_id'
-
 end
