@@ -22,12 +22,7 @@ class UsersControllerTest < ActionController::TestCase
 
   def test_create_valid
     post :create, {
-      :user => {
-        :username              => 'my name',
-        :email                 => 'my_email@example.com',
-        :password              => 'password',
-        :password_confirmation => 'password'
-      }
+      :user => User.plan
     }
     assert_valid assigns(:user)
     assert_redirected_to root_url

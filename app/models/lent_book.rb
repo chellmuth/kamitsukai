@@ -1,5 +1,7 @@
 class LentBook < ActiveRecord::Base
-  belongs_to :lender, :class_name => 'Users'
-  belongs_to :lendee, :class_name => 'Users'
-  belongs_to :book_edition
+  belongs_to :library_book,
+    :class_name => 'BookEditionsUser'
+  belongs_to :lent_to,
+    :class_name  => 'Users',
+    :foreign_key => 'lent_to_user_id'
 end

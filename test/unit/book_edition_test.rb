@@ -3,7 +3,7 @@ require 'test_helper'
 class BookEditionTest < ActiveSupport::TestCase
   test "create valid book edition" do
     e = BookEdition.new(
-      :book => Book.first
+      :book => Book.make
     )
     assert e.valid?
   end
