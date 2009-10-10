@@ -2,8 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
 
+  map.resource :account, :controller => "users"
   map.resources :user_sessions
-
   map.resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

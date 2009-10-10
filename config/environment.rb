@@ -6,6 +6,24 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# Authorization plugin for role based access control
+# You can override default authorization system constants here.
+
+# Can be 'object roles' or 'hardwired'
+AUTHORIZATION_MIXIN = "object roles"
+
+# NOTE : If you use modular controllers like '/admin/products' be sure
+# to redirect to something like '/sessions' controller (with a leading slash)
+# as shown in the example below or you will not get redirected properly
+#
+# This can be set to a hash or to an explicit path like '/login'
+#
+LOGIN_REQUIRED_REDIRECTION = '/login'
+PERMISSION_DENIED_REDIRECTION = '/'
+
+# The method your auth scheme uses to store the location to redirect back to
+STORE_LOCATION_METHOD = :store_location
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -20,12 +38,12 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
   # config.gem "amazon-ecs", :lib => "amazon/ecs"
-  config.gem "authlogic"
-  config.gem "faker"
-  config.gem "less"
-  config.gem "mongrel", :version => '1.1.5'
-  config.gem "notahat-machinist", :lib => "machinist", :source => "http://gems.github.com"
-  config.gem "pg", :version => '0.8.0'
+  config.gem 'authlogic'
+  config.gem 'faker'
+  config.gem 'less'
+  config.gem 'mongrel', :version => '1.1.5'
+  config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com'
+  config.gem 'pg', :version => '0.8.0'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -37,6 +55,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
+
   config.action_controller.session_store = :active_record_store
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
