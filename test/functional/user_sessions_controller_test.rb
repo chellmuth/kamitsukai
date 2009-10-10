@@ -35,6 +35,21 @@ class UserSessionsControllerTest < ActionController::TestCase
     assert_not_nil sess.record, "Should assign the user to the session"
     assert_equal sess.record, user, "Assigned user should be the one trying to log in."
 
+    assert_equal flash[:notice], "Successfully logged in."
     assert_redirected_to root_url, @response.location.to_s
+  end
+
+  def test_destroy
+    u = login
+    sess = UserSession.find
+    assert_not_nil sess
+    assert_not_nil sess.record, "Should have the user on the session"
+    assert_equal sess.record, u, "Assigned user should be the one logged in."
+
+    post :destroy
+
+    assert_not_nil assigns(:user_session)
+    assert_nil assigns(:user_session).record, "Should not assign a user to the session"
+    assert_equal flash[:notice], "Successfully logged out."
   end
 end
