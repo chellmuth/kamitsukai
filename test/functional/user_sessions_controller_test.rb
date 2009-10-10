@@ -5,25 +5,36 @@ class UserSessionsControllerTest < ActionController::TestCase
     get :new
     assert_template 'new'
     assert_not_nil assigns(:user_session)
+    assert_nil assigns(:user_session).record, "Should not assign a user to the session"
   end
 
   def test_create_invalid
+    user = User.make(:password => 'my password')
     post :create, {
-      :username => 'user',
-      :password => 'wrong password'
+      :user_session => {
+        :username => user.username,
+        :password => 'your password'
+      }
     }
     assert_template 'new'
+    assert_not_nil assigns(:user_session)
+    assert_nil assigns(:user_session).record, "Should not assign a user to the session"
+    assert flash.empty?
   end
 
   def test_create_valid
+    user = User.make
     post :create, {
-      :username => 'user',
-      :password => 'user_password'
+      :user_session => {
+        :username => user.username,
+        :password => user.password
+      }
     }
-    assert_not_nil assigns(:user_session)
+    sess = assigns(:user_session)
+    assert_not_nil sess
+    assert_not_nil sess.record, "Should assign the user to the session"
+    assert_equal sess.record, user, "Assigned user should be the one trying to log in."
 
-    # TODO: Figure out if this is a real problem, or just not knowing
-    # how to test.
-    #assert_redirected_to root_url, @response.location.to_s
+    assert_redirected_to root_url, @response.location.to_s
   end
 end

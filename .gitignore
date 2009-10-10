@@ -4,3 +4,4 @@
 /.autotest
 /config/database.yml
 /public/stylesheets
+/coverage

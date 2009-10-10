@@ -6,14 +6,12 @@ Sham.define do
   binding           { rand(2) == 0 ? "Hard cover" : "Soft cover"                               }
   body              { Faker::Lorem.paragraphs(3).join("\n\n")                                  }
   company           { Faker::Company.name                                                      }
-  crypted_password  { Authlogic::CryptoProviders::Sha512.encrypt(p)                            }
   date              { Date.civil((2005..2009).to_a.rand, (1..12).to_a.rand, (1..28).to_a.rand) }
   dewey_decimal     { sprintf("%03d.%02d", (000..999).to_a.rand, (00..99).to_a.rand)           }
   ean               { |index| sprintf("%013d", index)                                          }
   email             { Faker::Internet.email                                                    }
   isbn              { |index| sprintf("%013d", index)                                          }
   name              { Faker::Name.name                                                         }
-  number            { |n| rand(n) + 1                                                          }
   password          { Faker::Lorem.words(rand(5)+1).join(' ')                                  }
   password_salt     { Authlogic::Random.hex_token                                              }
   persistence_token { Authlogic::Random.hex_token                                              }
@@ -29,7 +27,7 @@ User.blueprint do
   password
   password_confirmation { self.password }
   #
-  crypted_password      { Sham.crypted_password(self.password + self.password_salt) }
+  crypted_password      { Authlogic::CryptoProviders::Sha512.encrypt(self.password + self.password_salt) }
   password_salt
   persistence_token
 end
@@ -49,12 +47,12 @@ BookEdition.blueprint do
   published                       { Sham.date         }
   released                        { Sham.date         }
   studio                          { Sham.company      }
-  pages                           { Sham.number(1000) }
-  height                          { Sham.number(20)   }
+  pages                           { rand(1000) + 1    }
+  height                          { rand(20) + 1      }
   height_units(:unique => false)  { 'inches'          }
-  length                          { Sham.number(20)   }
+  length                          { rand(20) + 1      }
   length_units(:unique => false)  { 'inches'          }
-  width                           { Sham.number(20)   }
+  width                           { rand(20) + 1      }
   width_units(:unique => false)   { 'inches'          }
   detail_page_url                 { Sham.web_page     }
 end
