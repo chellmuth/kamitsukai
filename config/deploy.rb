@@ -17,7 +17,7 @@ set :branch, 'master'
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 
-task :after_update_code, :roles => :app do  
+task :after_update_code, :roles => :app do
 
   # Rebuild the gem native extensions, unless we explicitly say not to.
   unless ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '0'
@@ -27,6 +27,13 @@ task :after_update_code, :roles => :app do
   # Generate the CSS files using MORE & LESS
   run "rake -f #{release_path}/Rakefile more:parse"
 end
+
+desc 'Deploy the seed data to the database.'
+task 'deploy:database:seed' do
+  run "rake -f #{release_path}/Rakefile db:seed"
+end
+
+after 'deploy:migrate', 'deploy:database:seed'
 
 namespace :deploy do
   task :start do
