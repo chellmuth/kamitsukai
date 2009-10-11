@@ -49,6 +49,11 @@ class ActiveSupport::TestCase
     assert UserSession.create(user)
     user
   end
+
+  def logout
+    session = UserSession.find
+    session.destroy
+  end
 end
 
 class ActionController::TestCase

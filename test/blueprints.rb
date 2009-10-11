@@ -65,3 +65,8 @@ LentBook.blueprint do
   user               { User.make              }
   due_at             { Sham.date              }
 end
+
+Setting.blueprint do
+  key   { Faker::Lorem.words(rand(5)+1).join('_')  }
+  value { Faker::Lorem.words(rand(10)+1).join(' ') }
+end

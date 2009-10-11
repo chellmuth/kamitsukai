@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
+  acts_as_authorized_user
+  acts_as_authorizable
   attr_accessible :username, :email, :password, :password_confirmation
 
   has_many :book_editions,
