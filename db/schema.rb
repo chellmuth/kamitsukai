@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091010191105) do
+ActiveRecord::Schema.define(:version => 20091015061203) do
+
+  create_table "amazon_images", :force => true do |t|
+    t.text     "url"
+    t.float    "height"
+    t.string   "height_units"
+    t.float    "width"
+    t.string   "width_units"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "book_editions", :force => true do |t|
     t.integer  "book_id",                       :null => false
@@ -30,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20091010191105) do
     t.integer  "width"
     t.string   "width_units"
     t.text     "detail_page_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "book_editions_images", :force => true do |t|
+    t.integer  "book_edition_id"
+    t.integer  "amazon_image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -5,8 +5,8 @@ class AmazonProductAdvertising
 
   def initialize
     @error      = nil
-    @aws_key    = retrieve_aws_key
-    @aws_secret = retrieve_aws_secret
+    @aws_key    = _retrieve_aws_key
+    @aws_secret = _retrieve_aws_secret
 
     Amazon::Ecs.options = {
       :aWS_access_key_id => @aws_key,
@@ -99,12 +99,12 @@ class AmazonProductAdvertising
     )
   end
 
-  def retrieve_aws_key
+  def _retrieve_aws_key
     key = Setting.find_by_key('aws_key')
     key.value
   end
 
-  def retrieve_aws_secret
+  def _retrieve_aws_secret
     key = Setting.find_by_key('aws_secret')
     key.value
   end

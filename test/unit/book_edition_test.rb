@@ -2,10 +2,14 @@ require 'test_helper'
 
 class BookEditionTest < ActiveSupport::TestCase
   test "create valid book edition" do
+    b = Book.make
     e = BookEdition.new(
-      :book => Book.make
+      :book => b
     )
-    assert e.valid?
+
+    assert_valid e
+    assert e.save
+    assert_equal e.book(true), b
   end
 
   test "create book edition without associated book" do
