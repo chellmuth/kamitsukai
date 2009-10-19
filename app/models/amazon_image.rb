@@ -1,7 +1,6 @@
 class AmazonImage < ActiveRecord::Base
-  has_many :book_editions_images
-  has_many :book_editions,
-    :through => :book_editions_images
+  has_and_belongs_to_many :book_editions,
+    :validate => false
 
   def validate
     errors.add_on_empty %w(

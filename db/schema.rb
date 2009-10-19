@@ -9,14 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091018094044) do
+ActiveRecord::Schema.define(:version => 20091019005708) do
 
   create_table "amazon_images", :force => true do |t|
-    t.text     "url"
-    t.float    "height"
-    t.string   "height_units"
-    t.float    "width"
-    t.string   "width_units"
+    t.text     "url",          :null => false
+    t.float    "height",       :null => false
+    t.string   "height_units", :null => false
+    t.float    "width",        :null => false
+    t.string   "width_units",  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,56 +44,67 @@ ActiveRecord::Schema.define(:version => 20091018094044) do
     t.datetime "updated_at"
   end
 
-  create_table "book_editions_images", :force => true do |t|
-    t.integer  "book_edition_id"
-    t.integer  "amazon_image_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "book_editions_images", :id => false, :force => true do |t|
+    t.integer "book_edition_id", :null => false
+    t.integer "amazon_image_id", :null => false
   end
 
-  create_table "book_editions_users", :force => true do |t|
-    t.integer  "book_edition_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  add_index "book_editions_images", ["amazon_image_id"], :name => "index_book_editions_images_on_amazon_image_id"
+  add_index "book_editions_images", ["book_edition_id", "amazon_image_id"], :name => "unq_book_editions_images_edition_image", :unique => true
+  add_index "book_editions_images", ["book_edition_id"], :name => "index_book_editions_images_on_book_edition_id"
+
+  create_table "book_editions_users", :id => false, :force => true do |t|
+    t.integer "book_edition_id", :null => false
+    t.integer "user_id",         :null => false
   end
+
+  add_index "book_editions_users", ["book_edition_id"], :name => "index_book_editions_users_on_book_edition_id"
+  add_index "book_editions_users", ["user_id"], :name => "index_book_editions_users_on_user_id"
 
   create_table "books", :force => true do |t|
-    t.text     "title"
+    t.text     "title",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "friends_users", :id => false, :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "user_id",   :null => false
+    t.integer "friend_id", :null => false
   end
 
+  add_index "friends_users", ["friend_id"], :name => "index_friends_users_on_friend_id"
+  add_index "friends_users", ["user_id", "friend_id"], :name => "index_friends_users_on_user_id_and_friend_id", :unique => true
+  add_index "friends_users", ["user_id"], :name => "index_friends_users_on_user_id"
+
   create_table "lent_books", :force => true do |t|
-    t.integer  "book_editions_user_id"
-    t.integer  "lent_to_user_id"
+    t.integer  "book_editions_user_id", :null => false
+    t.integer  "lent_to_user_id",       :null => false
     t.datetime "due_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "lent_books", ["book_editions_user_id"], :name => "index_lent_books_on_book_editions_user_id"
+  add_index "lent_books", ["lent_to_user_id"], :name => "index_lent_books_on_lent_to_user_id"
+
   create_table "roles", :force => true do |t|
-    t.string   "name",              :limit => 40
-    t.string   "authorizable_type", :limit => 40
+    t.string   "name",              :null => false
     t.integer  "authorizable_id"
+    t.string   "authorizable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
+  create_table "roles_users", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "role_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "id"
   end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id", "role_id"], :name => "index_roles_users_on_user_id_and_role_id", :unique => true
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :limit => 600, :null => false
@@ -106,18 +117,20 @@ ActiveRecord::Schema.define(:version => 20091018094044) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "settings", :force => true do |t|
-    t.string   "key"
+    t.string   "key",        :null => false
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "settings", ["key"], :name => "index_settings_on_key", :unique => true
+
   create_table "users", :force => true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
+    t.string   "username",          :null => false
+    t.string   "email",             :null => false
+    t.string   "crypted_password",  :null => false
+    t.string   "password_salt",     :null => false
+    t.string   "persistence_token", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

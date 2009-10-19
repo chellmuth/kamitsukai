@@ -1,17 +1,11 @@
 class BookEdition < ActiveRecord::Base
   belongs_to :book
-#  has_many :book_editions_users
-#  has_many :users,
-#    :through => :book_editions_users
-#  has_many :book_editions_images
-#  has_many :images,
-#    :through => :book_editions_images,
-#    :source  => :amazon_image
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :images,
+    :class_name => 'AmazonImages',
+    :join_table => :book_editions_images
 
   def validate
     errors.add_on_empty %w( book )
-  end
-
-  def find_or_create_by_isbn(isbn)
   end
 end

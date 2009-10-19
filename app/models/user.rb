@@ -4,10 +4,8 @@ class User < ActiveRecord::Base
   acts_as_authorizable
   attr_accessible :username, :email, :password, :password_confirmation
 
-  has_many :book_editions_users
-  has_many :book_editions,
-    :through => :book_editions_users,
-    :include => :book
+  has_and_belongs_to_many :book_editions,
+    :validate => false
   has_and_belongs_to_many :friends,
     :class_name              => 'User',
     :join_table              => :friends_users,

@@ -1,5 +1,10 @@
 class Book < ActiveRecord::Base
-  validates_presence_of :title
+  has_many :editions,
+    :class_name => 'BookEdition',
+    :autosave   => true,
+    :dependent  => :destroy
 
-  has_many :editions, :class_name => 'BookEdition'
+  def validate
+    errors.add_on_empty %w( title )
+  end
 end
