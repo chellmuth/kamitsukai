@@ -1,5 +1,6 @@
 require 'machinist/active_record'
 require 'sham'
+require 'faker'
 
 Sham.binding(:unique => false)       { rand(2) == 0 ? 'Hard cover' : 'Soft cover'                     }
 Sham.dewey_decimal(:unique => false) { sprintf("%03d.%02d", (000..999).to_a.rand, (00..99).to_a.rand) }
@@ -38,7 +39,7 @@ Book.blueprint do
 end
 
 BookEdition.blueprint do
-  book            { Book.make      }
+  book
   isbn
   ean
   asin
@@ -59,13 +60,13 @@ BookEdition.blueprint do
 end
 
 BookEditionsUser.blueprint do
-  book_edition { BookEdition.make }
-  user         { User.make        }
+  book_edition
+  user
 end
 
 LentBook.blueprint do
   book_editions_user { BookEditionsUser.make }
-  user               { User.make             }
+  lent_to_user       { User.make             }
   due_at             { Sham.date             }
 end
 
