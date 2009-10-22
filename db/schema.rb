@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091019005708) do
+ActiveRecord::Schema.define(:version => 20091022064900) do
 
   create_table "amazon_images", :force => true do |t|
     t.text     "url",          :null => false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20091019005708) do
     t.string   "isbn",            :limit => 13
     t.string   "ean",             :limit => 13
     t.string   "asin"
-    t.string   "binding"
+    t.string   "binding_type"
     t.float    "dewey_decimal"
     t.text     "publisher"
     t.date     "published"

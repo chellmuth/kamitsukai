@@ -2,7 +2,7 @@ require 'machinist/active_record'
 require 'sham'
 require 'faker'
 
-Sham.binding(:unique => false)       { rand(2) == 0 ? 'Hard cover' : 'Soft cover'                     }
+Sham.binding_type(:unique => false)  { rand(2) == 0 ? 'Hard cover' : 'Soft cover'                     }
 Sham.dewey_decimal(:unique => false) { sprintf("%03d.%02d", (000..999).to_a.rand, (00..99).to_a.rand) }
 
 Sham.define do
@@ -43,7 +43,7 @@ BookEdition.blueprint do
   isbn
   ean
   asin
-  binding
+  binding_type
   dewey_decimal
   publisher       { Sham.company   }
   published       { Sham.date      }
