@@ -17,7 +17,24 @@ class UserTest < ActiveSupport::TestCase
     assert user.friends(true).empty?
 
     user.friends << friend
-    assert !user.friends(true).empty?
-    assert_equal user.friends(true).first, friend
+    user.reload
+    assert !user.friends().empty?
+    assert_equal user.friends().first, friend
+  end
+
+  test 'users are friends of other users' do
+    user = User.make
+    friend = User.make
+    another_friend = User.make
+
+    assert user.friend_of(true).empty?
+
+    friend.friends << user
+    another_friend.friends << user
+
+    user.reload
+
+    assert !user.friend_of().empty?
+    assert_equal user.friend_of, [friend, another_friend]
   end
 end
