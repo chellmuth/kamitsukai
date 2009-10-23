@@ -3,6 +3,7 @@
 /lib/tasks/devver.rake
 /.autotest
 /config/database.yml
+/config/newrelic.yml
 /public/stylesheets
 /coverage.data
 /test/coverage/
