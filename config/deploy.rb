@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__), 'capistrano_database')
+require File.join(File.dirname(__FILE__), 'capistrano_newrelic')
 
 set :application, 'kamitsukai'
 set :repository,  'git@github.com:jhelwig/kamitsukai.git'
