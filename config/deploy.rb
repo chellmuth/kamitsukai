@@ -21,16 +21,16 @@ task :after_update_code, :roles => :app do
 
   # Rebuild the gem native extensions, unless we explicitly say not to.
   unless ENV['BUILD_GEMS'] and ENV['BUILD_GEMS'] == '0'
-    run "rake -f #{release_path}/Rakefile gems:build"
+    run "rake -f #{release_path}/Rakefile gems:build RAILS_ENV=production"
   end
 
   # Generate the CSS files using MORE & LESS
-  run "rake -f #{release_path}/Rakefile more:parse"
+  run "rake -f #{release_path}/Rakefile more:parse RAILS_ENV=production"
 end
 
 desc 'Deploy the seed data to the database.'
 task 'deploy:database:seed' do
-  run "rake -f #{release_path}/Rakefile db:seed"
+  run "rake -f #{release_path}/Rakefile db:seed RAILS_ENV=production"
 end
 
 after 'deploy:migrate', 'deploy:database:seed'
