@@ -42,7 +42,7 @@ Rails::Initializer.run do |config|
   config.gem 'faker'
   config.gem 'less'
   config.gem 'mocha'
-  config.gem 'newrelic_rpm', :version => '2.9.5'
+  #config.gem 'newrelic_rpm', :version => '2.9.5'
   config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com'
   config.gem 'pg', :version => '0.8.0'
   config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
