@@ -71,9 +71,9 @@ Setting.blueprint do
 end
 
 AmazonImage.blueprint do
-  url          { Sham.web_page         }
-  height       { rand(3000)+1          }
-  height_units { Faker::Lorem.words(1) }
-  width        { rand(3000)+1          }
-  width_units  { self.height_units     }
+  url          { Sham.web_page                              }
+  height       { rand(3000)+1                               }
+  height_units { Faker::Lorem.words(1)                      }
+  width        { rand(3000)+1                               }
+  width_units  { self.height_units || Faker::Lorem.words(1) }
 end
