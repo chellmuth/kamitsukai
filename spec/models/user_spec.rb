@@ -28,7 +28,7 @@ describe 'A User' do
     user.book_editions << book_editions[0]
     user.reload
 
-    user.should have(1).book_editions
+    user.should have(1).book_edition
     user.book_editions.should     include(book_editions[0])
     user.book_editions.should_not include(book_editions[1])
     user.book_editions.should_not include(book_editions[2])
@@ -69,7 +69,7 @@ describe 'A User' do
       @user.friends << @friend
       @user.reload
 
-      @user.should have(1).friends
+      @user.should have(1).friend
       @user.friends.should     include(@friend)
       @user.friends.should_not include(@another_friend)
 

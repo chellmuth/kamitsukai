@@ -30,7 +30,7 @@ describe 'A Book' do
     book.editions << book_editions[0]
     book.reload
 
-    book.should have(1).editions
+    book.should have(1).edition
     book.editions.should     include(book_editions[0])
     book.editions.should_not include(book_editions[1])
     book.editions.should_not include(book_editions[2])
