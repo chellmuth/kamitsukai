@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091022064900) do
+ActiveRecord::Schema.define(:version => 20091024172836) do
 
   create_table "amazon_images", :force => true do |t|
     t.text     "url",          :null => false
@@ -53,13 +53,12 @@ ActiveRecord::Schema.define(:version => 20091022064900) do
   add_index "book_editions_images", ["book_edition_id", "amazon_image_id"], :name => "unq_book_editions_images_edition_image", :unique => true
   add_index "book_editions_images", ["book_edition_id"], :name => "index_book_editions_images_on_book_edition_id"
 
-  create_table "book_editions_users", :id => false, :force => true do |t|
-    t.integer "book_edition_id", :null => false
-    t.integer "user_id",         :null => false
+  create_table "book_editions_users", :force => true do |t|
+    t.integer  "book_edition_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "book_editions_users", ["book_edition_id"], :name => "index_book_editions_users_on_book_edition_id"
-  add_index "book_editions_users", ["user_id"], :name => "index_book_editions_users_on_user_id"
 
   create_table "books", :force => true do |t|
     t.text     "title",      :null => false

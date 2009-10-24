@@ -59,10 +59,15 @@ BookEdition.blueprint do
   detail_page_url { Sham.web_page  }
 end
 
+BookEditionsUser.blueprint do
+  book_edition
+  user
+end
+
 LentBook.blueprint do
-  book_editions_user { BookEditionsUser.make }
-  lent_to_user       { User.make             }
-  due_at             { Sham.date             }
+  library_book
+  lent_to
+  due_at       { Sham.date             }
 end
 
 Setting.blueprint do
