@@ -7,18 +7,27 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-    
+
     when /the home\s?page/
       '/'
-    when /the new frooble page/
-      new_frooble_path
 
-    
+    when /the new user page/
+      new_user_path
+
     # Add more mappings here.
     # Here is a more fancy example:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+
+    when /the log\s?in page/
+      '/login'
+
+    when /the log\s?out page/
+      '/logout'
+
+    when /(my )?edit profile page/
+      edit_user_path('current')
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
