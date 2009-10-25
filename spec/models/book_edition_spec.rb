@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'A BookEdition' do
+describe BookEdition do
   it 'should create a new instance given valid attributes' do
     book_edition = BookEdition.new(BookEdition.plan)
     book_edition.should be_valid
@@ -93,5 +93,47 @@ describe 'A BookEdition' do
     book_edition.images.should include(images[0])
     book_edition.images.should include(images[1])
     book_edition.images.should include(images[2])
+  end
+
+  describe 'is looked up using a bad' do
+    describe 'ISBN' do
+      it 'should raise an exception'
+    end
+
+    describe 'UPC' do
+      it 'should raise an exception'
+    end
+  end
+
+  describe 'is looked up using a good' do
+    describe 'ISBN' do
+      describe 'and already exists' do
+        it 'should return the existing BookEdition'
+        it 'should not create a new BookEdition'
+      end
+
+      describe 'and does not already exist' do
+        before(:each) do
+        end
+
+        it 'should create a new BookEdition'
+        it 'should have AmazonImages associated with the new BookEdition'
+      end
+    end
+
+    describe 'UPC' do
+      describe 'and already exists' do
+        it 'should return the existing BookEdition'
+        it 'should not create a new BookEdition'
+      end
+
+      describe 'and does not already exist' do
+        before(:each) do
+        end
+
+        it 'should create a new BookEdition'
+        it 'should have AmazonImages associated with the new BookEdition'
+      end
+    end
   end
 end
