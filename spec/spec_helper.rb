@@ -15,14 +15,24 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].e
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
 
-  config.before(:all)  {
-    Sham.reset(:before_all)
-  }
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  config.before(:each) {
+  config.before(:all) do
+    Sham.reset(:before_all)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
     Sham.reset(:before_each)
     activate_authlogic
-  }
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 def login(user_info=nil)

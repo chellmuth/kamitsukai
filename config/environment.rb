@@ -39,6 +39,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'amazon-ecs', :lib => 'amazon/ecs'
   config.gem 'authlogic'
+  config.gem 'database_cleaner', :source => 'http://gemcutter.org'
   config.gem 'faker'
   config.gem 'less'
   config.gem 'mocha'
