@@ -1,14 +1,14 @@
 def run_spec_file(test_file)
-  output_header
+  output_header test_file
   system %Q{./script/spec '#{test_file}' --diff unified --format nested --color}
 end
 
 def run_cucumber_feature(feature_file)
-  output_header
+  output_header feature_file
   system %Q{cucumber '#{feature_file}' --color --strict --format pretty}
 end
 
-def output_header
+def output_header(test_file)
   puts "\n\n"
   system "date"
   puts test_file
@@ -40,7 +40,7 @@ watch('spec/.*_spec\.rb') do |md|
   run_spec_file test_file
 end
 
-watch('feature/.*\.feature') do |md|
+watch('features/.*\.feature') do |md|
   feature_file = "#{md[0]}"
 
   run_cucumber_feature feature_file
