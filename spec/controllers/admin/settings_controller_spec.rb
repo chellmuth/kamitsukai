@@ -5,11 +5,10 @@ describe Admin::SettingsController do
     controller.should be_an_instance_of(Admin::SettingsController)
   end
 
-
   describe 'without a logged in user' do
     it 'should redirect to the login page' do
       get :index
-      response.should redirect_to '/login'
+      response.should redirect_to('/login')
     end
   end
 
@@ -20,7 +19,7 @@ describe Admin::SettingsController do
 
     it 'should redirect home' do
       get :index
-      response.should redirect_to '/'
+      response.should redirect_to('/')
     end
 
     describe 'that is an administrattor' do
@@ -133,7 +132,7 @@ describe Admin::SettingsController do
 
           it 'should redirect to the setting' do
             do_good_update
-            response.should redirect_to admin_setting_url(@setting)
+            response.should redirect_to(admin_setting_url(@setting))
           end
 
           it 'should set a success flash message' do
@@ -167,7 +166,7 @@ describe Admin::SettingsController do
         describe "PUT 'create'" do
           it 'should redirect to settings list' do
             put :create, { :setting => Setting.plan }
-            response.should redirect_to admin_settings_url
+            response.should redirect_to(admin_settings_url)
           end
 
           it 'should create a new setting' do
@@ -185,7 +184,7 @@ describe Admin::SettingsController do
         describe "DELETE 'destroy'" do
           it 'should redirect back to the settings list' do
             delete :destroy, { :id => @setting.id }
-            response.should redirect_to admin_settings_url
+            response.should redirect_to(admin_settings_url)
           end
 
           it 'should set a success flash message' do
@@ -293,7 +292,7 @@ describe Admin::SettingsController do
           end
           it 'should be successful' do
             do_bad_delete
-            response.should redirect_to admin_settings_url
+            response.should redirect_to(admin_settings_url)
           end
 
           it 'should set a failure flash message' do
