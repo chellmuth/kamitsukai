@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  filter_parameter_logging "password"
+  filter_parameter_logging 'password'
 
   helper_method :current_user, :current_user_session
 
@@ -23,21 +23,23 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    unless current_user
+    if current_user.nil?
       store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
+      redirect_to '/login'
       return false
     end
+    return true
   end
 
   def require_no_user
-    if current_user
+    unless current_user.nil?
       store_location
       flash[:notice] = "You must be logged out to access this page"
       redirect_to account_url
       return false
     end
+    return true
   end
 
   def store_location

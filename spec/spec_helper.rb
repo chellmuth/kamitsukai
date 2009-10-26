@@ -25,9 +25,9 @@ Spec::Runner.configure do |config|
   end
 
   config.before(:each) do
+    activate_authlogic
     DatabaseCleaner.start
     Sham.reset(:before_each)
-    activate_authlogic
   end
 
   config.after(:each) do
@@ -43,5 +43,5 @@ end
 
 def logout
   session = UserSession.find
-  session.destroy
+  session.destroy unless session.nil?
 end
