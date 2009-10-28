@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
   def validate
     errors.add_on_empty %w( username email )
   end
+
+  def to_param
+    username
+  end
 end

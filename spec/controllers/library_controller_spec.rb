@@ -13,7 +13,7 @@ describe LibraryController do
     describe "GET 'index'" do
       it 'should redirect to the show action' do
         get :index
-        response.should redirect_to(user_library_url(:username => @user.username))
+        response.should redirect_to(user_library_url(:username => @user))
       end
     end
 
