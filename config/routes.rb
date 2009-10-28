@@ -3,12 +3,15 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :settings
   end
 
-  map.login "login", :controller => "user_sessions", :action => "new"
-  map.logout "logout", :controller => "user_sessions", :action => "destroy"
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
 
-  map.resource :account, :controller => "users"
+  map.resource :account, :controller => 'users'
   map.resources :user_sessions
   map.resources :users
+
+  map.library      'library',           :controller => 'library', :action => 'index'
+  map.user_library 'library/:username', :controller => 'library', :action => 'show'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
