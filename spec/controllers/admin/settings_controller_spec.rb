@@ -163,20 +163,20 @@ describe Admin::SettingsController do
           end
         end
 
-        describe "PUT 'create'" do
+        describe "POST 'create'" do
           it 'should redirect to settings list' do
-            put :create, { :setting => Setting.plan }
+            post :create, { :setting => Setting.plan }
             response.should redirect_to(admin_settings_url)
           end
 
           it 'should create a new setting' do
             lambda {
-              put :create, { :setting => Setting.plan }
+              post :create, { :setting => Setting.plan }
             }.should change{ Setting.count }.from(1).to(2)
           end
 
           it 'should set a success flash message' do
-            put :create, { :setting => Setting.plan }
+            post :create, { :setting => Setting.plan }
             flash[:notice].should == 'Setting successfully created.'
           end
         end
