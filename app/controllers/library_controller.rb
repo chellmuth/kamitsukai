@@ -6,13 +6,12 @@ class LibraryController < ApplicationController
   end
 
   def show
-    user = User.find_by_username(params[:username])
-
+    @user = User.find_by_username(params[:username])
     @library_entries = []
-    if user.nil?
+    if @user.nil?
       flash[:notice] = 'No such user'
     else
-      @library_entries = user.book_editions_users(:include => { :book_edition => :book })
+      @library_entries = @user.book_editions_users(:include => { :book_edition => :book })
     end
   end
 end

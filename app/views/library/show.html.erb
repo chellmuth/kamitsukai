@@ -1,4 +1,4 @@
-<h1>The library of <%= h current_user.username %></h1>
+<h1>The library of <%= h @user.username %></h1>
 
 <table>
   <thead>
@@ -13,10 +13,10 @@
   <tbody>
   <% @library_entries.each do |library_entry| %>
     <tr>
-      <td><%= h library_entry.book.title %></td>
+      <td><%= h library_entry.book_edition.book.title %></td>
       <td>N/A</td>
-      <td><%= h library_entry.released %></td>
-      <td><%= h library_entry.binding_type %></td>
+      <td><%= h library_entry.book_edition.released %></td>
+      <td><%= h library_entry.book_edition.binding_type %></td>
       <td><%= h library_entry.created_at %></td>
     </tr>
   <% end %>
