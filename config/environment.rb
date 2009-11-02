@@ -41,6 +41,7 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem 'database_cleaner', :source => 'http://gemcutter.org'
   config.gem 'faker'
+  config.gem 'formtastic', :source => 'http://gemcutter.org'
   config.gem 'less'
   config.gem 'mocha'
   config.gem 'newrelic_rpm', :version => '2.9.5'

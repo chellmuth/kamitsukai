@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title><%= h(yield(:title) || "Kamitsukai") %></title>
     <%= stylesheet_link_tag('blueprint/screen', :media => 'screen, projection') %>
@@ -8,7 +8,7 @@
     <!--[if lt IE 8]>
       <%= stylesheet_link_tag('blueprint/ie', :media => 'screen, projection') %>
     <![endif]-->
-    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag('application', 'formtastic', 'formtastic_changes', :cache => 'base') %>
     <%= javascript_include_tag(:defaults, :cache => true) %>
     <%= yield(:head) %>
   </head>
