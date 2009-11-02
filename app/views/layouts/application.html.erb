@@ -11,15 +11,20 @@
     <%= stylesheet_link_tag(:all, :cache => true) %>
     <%= javascript_include_tag(:all, :cache => true) %>
     <%= yield(:head) %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('ul.sf-menu').superfish();
+      });
+    </script>
   </head>
   <body>
     <div class="container">
       <div id="header" class="span-24 last">
-        <div id="logo" class="span-20">
+        <div id="logo" class="span-14">
           <h1>Kamitsukai</h1>
         </div>
 
-        <div id="user_nav" class="span-4 last">
+        <div id="user_nav" class="span-10 last">
           <% if current_user %>
             (<%= h current_user.username %>)
             <%= link_to("Edit Profile", edit_user_path(:current)) %> |
@@ -28,6 +33,38 @@
             <%= link_to("Register", new_user_path) %> |
             <%= link_to("Login", login_path) %>
           <% end %>
+        </div>
+
+        <div id="navigation" class="span-24 last">
+          <%= semantic_menu :class => 'sf-menu sf-navbar' do |root|
+            root.add "Home", root_path do |home|
+              unless current_user
+                home.add "Register", new_user_path
+                home.add "Login", login_path
+              else
+                home.add "Dashboard", '/dashboard'
+              end
+            end
+
+            if current_user
+              root.add "Library", library_path do |library|
+                library.add "View", library_path
+                library.add "Add Books", library_path
+              end
+
+              root.add "User", user_path(:current) do |user|
+                user.add "Edit", edit_user_path(:current)
+                user.add "Friends", edit_user_path(:current)
+              end
+
+              if current_user.has_role? :administrator
+                root.add "Admin", '/admin' do |admin|
+                  admin.add "Settings", admin_settings_path
+                  admin.add "Users", admin_settings_path
+                end
+              end
+            end
+          end %>
         </div>
       </div>
       <hr />
