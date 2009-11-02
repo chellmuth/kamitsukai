@@ -39,17 +39,11 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem 'amazon-ecs', :lib => 'amazon/ecs'
   config.gem 'authlogic'
-  config.gem 'database_cleaner', :source => 'http://gemcutter.org'
   config.gem 'faker'
   config.gem 'formtastic', :source => 'http://gemcutter.org'
   config.gem 'less'
-  config.gem 'mocha'
   config.gem 'newrelic_rpm', :version => '2.9.5'
-  config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com'
   config.gem 'pg', :version => '0.8.0'
-  config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
-  config.gem "rspec", :lib => false, :version => ">= 1.2.9"
-  config.gem "rspec-rails", :lib => false, :version => ">= 1.2.9"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

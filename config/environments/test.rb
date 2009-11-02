@@ -28,6 +28,10 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 config.gem 'cucumber'
-config.gem 'notahat-machinist', :lib => 'machinist'
+config.gem 'database_cleaner', :source => 'http://gemcutter.org'
 config.gem 'faker'
-
+config.gem 'mocha'
+config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com'
+config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
+config.gem "rspec", :lib => false, :version => ">= 1.2.9"
+config.gem "rspec-rails", :lib => false, :version => ">= 1.2.9"
