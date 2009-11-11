@@ -64,11 +64,11 @@ class AmazonProductAdvertising
     package = attrs.search_and_convert('packagedimensions')
 
     item[:height]       = package.get('height')
-    item[:height_units] = package.elem.at('height')[:Units]
+    item[:height_units] = package.elem.at('height')[:units]
     item[:length]       = package.get('length')
-    item[:length_units] = package.elem.at('height')[:Units]
+    item[:length_units] = package.elem.at('height')[:units]
     item[:width]        = package.get('width')
-    item[:width_units]  = package.elem.at('width')[:Units]
+    item[:width_units]  = package.elem.at('width')[:units]
 
     item
   end
@@ -77,9 +77,9 @@ class AmazonProductAdvertising
     {
       :url          => element.get('url'),
       :height       => element.get('height'),
-      :height_units => element.elem.at('height')[:Units],
+      :height_units => element.elem.at('height')[:units],
       :width        => element.get('width'),
-      :width_units  => element.elem.at('width')[:Units]
+      :width_units  => element.elem.at('width')[:units]
     }
   end
 
