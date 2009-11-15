@@ -31,7 +31,7 @@ config.gem 'cucumber'
 config.gem 'database_cleaner', :source => 'http://gemcutter.org'
 config.gem 'faker'
 config.gem 'mocha'
-config.gem 'notahat-machinist', :lib => 'machinist', :source => 'http://gems.github.com'
-config.gem 'relevance-rcov', :lib => 'rcov', :source => 'http://gems.github.com'
+config.gem 'machinist', :source => 'http://gemcutter.org'
+config.gem 'rcov', :source => 'http://gemcutter.org'
 config.gem "rspec", :lib => false, :version => ">= 1.2.9"
 config.gem "rspec-rails", :lib => false, :version => ">= 1.2.9"
